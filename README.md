@@ -7,7 +7,7 @@ I2C interface for 7 segment LCD
 
 Con One Digit Display puoi controllare [questi](https://github.com/ChristianIannella/OneDigitDisplay/blob/main/Media/7%20segment%20lcd.png) LCD a 7 segmenti dall'aspetto in po' vintage semplicemente con interfaccia I2C, quindi con solo due fili!
 
-Il modulo lavora a 5V.
+Il modulo lavora a 5V. Tramite la porta ICSP è possibile modificare o aggiornare il firmware. Ecco il mio programmatore [ICSP](https://www.tindie.com/products/30806/)
 
 # I2C COMMAND
 
@@ -128,3 +128,33 @@ Il comando `46` mostra il DP, non necessita di parametri.
 Per indirizzare il display sul retro ci sono 3 dip switch quindi 8 indirizzi possibili, assicurati di dare l'indirizzo desiderato prima di alimentare la scheda.
 
 Nel caso hai bisogno di cambiare indirizzo assicurati di spegnere e riaccendere la schheda dopo averlo cambiato.
+
+# I2C EXAMPLE
+
+```
+#include <Wire.h>
+
+int address = 0;
+byte command[2];
+
+void setup()
+{
+  Wire.begin();
+  delay(100);
+
+  command[0] = 39; // Erase All Command 
+  command[1] = 0;
+  Wire.beginTransmission(address);
+  Wire.write(command, sizeof command);
+  Wire.endTransmission();
+
+  command[0] = 37; // Rainbow
+  command[1] = 50;
+  Wire.beginTransmission(address[);
+  Wire.write(command, sizeof command);
+  Wire.endTransmission();  
+}
+
+void loop(){
+}
+```
