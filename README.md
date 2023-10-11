@@ -7,6 +7,8 @@ I2C interface for 7 segment LCD
 
 Con One Digit Display puoi controllare [questi](https://github.com/ChristianIannella/OneDigitDisplay/blob/main/Media/7%20segment%20lcd.png) LCD a 7 segmenti dall'aspetto in po' vintage semplicemente con interfaccia I2C, quindi con solo due fili!
 
+Il modulo lavora a 5V.
+
 # I2C COMMAND
 
 Ecco la lista completa dei comandi.
@@ -61,6 +63,7 @@ Ecco la lista completa dei comandi.
 Ogni comando è formato da due Byte, il primo indica la funzione da eseguire e il secondo è un parametro che cambia a seconda della funzione.
 
 Nel di comnadi che stampano caratteri o numeri il parametro puo valere `0`o `1`, `1` attiverà anche il DP `0` no.
+I comandi per stampare i caratteri in oltre seguono il codice ASCII.
 
 ```
   address = 0
@@ -73,7 +76,11 @@ Nel di comnadi che stampano caratteri o numeri il parametro puo valere `0`o `1`,
 
 L'esempio sopra stamperà la lettera "A" e accenderà il DP del display con indirizzo 0.
 
-Il comando `34` farà lampeggiare il DP con una velocità compresa tra 100 ms 2s
+
+Il comando `10` (`erase`) pulisce il display ma lascia attive le altre fuzioni tiopo retroilluminazione ecc. Non necessita di parametri aggiuntivi.
+
+
+Il comando `34` (`DP blink`) farà lampeggiare il DP con una velocità compresa tra 100 ms e 2s
 
 |Secon Byte|Velocità|
 |---|---|
@@ -86,6 +93,10 @@ Il comando `34` farà lampeggiare il DP con una velocità compresa tra 100 ms 2s
 |6|1500ms|
 |7|2000ms|
 
+
+Esempio:
+
+
 ```
   address = 0
   command[0] = 34;
@@ -94,6 +105,22 @@ Il comando `34` farà lampeggiare il DP con una velocità compresa tra 100 ms 2s
   Wire.write(command, sizeof command);
   Wire.endTransmission();
 ```
+
+Il comando `35` (`DP stop`) blocca il lampeggio del DP e col secondo Byte si puo' decidere se tenerlo acceso o spento.
+
+Il comando `36` serve per cambiare il colore della retroilluminazone tramite il parametro che va da `0` a `255`
+
+
+Il comando `37` serve per cambiare la luminosità il parametro che va da `0` a `255`
+
+
+Il comando `38` (`rainbow`) avvia un effetto di colori casuali che cambiano piu' o meno velocemente in base al secondo Byte. Per interrompere l'effetto basta cambiare colore o con il comando `erase_all`.
+
+
+Il comando `39` fa quello che fa `erase` ma questa volta blocca anche tutte le funzioni attive come `DP blink` o `rainbow`
+
+
+Il comando `46` mostra il DP, non necessita di parametri.
 
 
 
