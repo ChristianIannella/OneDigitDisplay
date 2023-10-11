@@ -78,6 +78,7 @@ void print_segment_f(); // 40          (0 or 1)
 void print_segment_g(); // 33          (0 or 1)
                         // 34          (1 to 7)         dp blink
                         // 35          (0 or 1)         dp stop
+                        // 36          (0 or 255)       Background color
                         // 37          (0 to 255)       Backlight brightness
                         // 38          (1 to 255)       Rainbow
                         // 39             x             erase all
