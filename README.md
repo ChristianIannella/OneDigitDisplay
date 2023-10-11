@@ -5,7 +5,7 @@ I2C interface for 7 segment LCD
 ![OneDigitDisplay Iannella Christian](https://github.com/ChristianIannella/OneDigitDisplay/blob/main/Media/OneDigitDisplay%203D.gif)
 
 
-Con One Digit Display puoi controllare questi LCD a 7 segmenti dall'aspetto in po' vintage semplicemente con interfaccia I2C, quindi con solo due fili!
+Con One Digit Display puoi controllare [questi](https://github.com/ChristianIannella/OneDigitDisplay/blob/main/Media/7%20segment%20lcd.png) LCD a 7 segmenti dall'aspetto in po' vintage semplicemente con interfaccia I2C, quindi con solo due fili!
 
 
 Ecco la lista completa dei comandi possibili.
