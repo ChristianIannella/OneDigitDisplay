@@ -150,7 +150,7 @@ void setup()
 
   command[0] = 37; // Rainbow
   command[1] = 50;
-  Wire.beginTransmission(address[);
+  Wire.beginTransmission(address);
   Wire.write(command, sizeof command);
   Wire.endTransmission();  
 }
