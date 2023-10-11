@@ -7,7 +7,7 @@ I2C interface for 7 segment LCD
 
 Con One Digit Display puoi controllare [questi](https://github.com/ChristianIannella/OneDigitDisplay/blob/main/Media/7%20segment%20lcd.png) LCD a 7 segmenti dall'aspetto in po' vintage semplicemente con interfaccia I2C, quindi con solo due fili!
 
-Il modulo lavora a 5V.
+Il modulo lavora a 5V. Tramite la porta ICSP è possibile modificare o aggiornare il firmware. Ecco il mio programmatore [ICSP](https://www.tindie.com/products/30806/)
 
 # I2C COMMAND
 
