@@ -7,6 +7,7 @@ I2C interface for 7 segment LCD
 
 Con One Digit Display puoi controllare [questi](https://github.com/ChristianIannella/OneDigitDisplay/blob/main/Media/7%20segment%20lcd.png) LCD a 7 segmenti dall'aspetto in po' vintage semplicemente con interfaccia I2C, quindi con solo due fili!
 
+# I2C COMMAND
 
 Ecco la lista completa dei comandi.
 
@@ -56,3 +57,47 @@ Ecco la lista completa dei comandi.
 |37          |(0 to 255)   |  Backlight brightness|
 |38          |(0 to 255)   |  Rainbow effec, default speed 0|
 |39          |   0         |  Erase all|
+
+Ogni comando è formato da due Byte, il primo indica la funzione da eseguire e il secondo è un parametro che cambia a seconda della funzione.
+
+Nel di comnadi che stampano caratteri o numeri il parametro puo valere `0`o `1`, `1` attiverà anche il DP `0` no.
+
+```
+  address = 0
+  command[0] = 65;
+  command[1] = 1;
+  Wire.beginTransmission(address);
+  Wire.write(command, sizeof command);
+  Wire.endTransmission();
+```
+
+L'esempio sopra stamperà la lettera "A" e accenderà il DP del display con indirizzo 0.
+
+Il comando `34` farà lampeggiare il DP con una velocità compresa tra 100 ms 2s
+
+|Secon Byte|Velocità|
+|---|---|
+|0|100ms|
+|1|200ms|
+|2|300ms|
+|3|400ms|
+|4|500ms|
+|5|1000ms|
+|6|1500ms|
+|7|2000ms|
+
+```
+  address = 0
+  command[0] = 34;
+  command[1] = 4;
+  Wire.beginTransmission(address);
+  Wire.write(command, sizeof command);
+  Wire.endTransmission();
+```
+
+
+
+# I2C ADDRESS
+Per indirizzare il display sul retro ci sono 3 dip switch quindi 8 indirizzi possibili, assicurati di dare l'indirizzo desiderato prima di alimentare la scheda.
+
+Nel caso hai bisogno di cambiare indirizzo assicurati di spegnere e riaccendere la schheda dopo averlo cambiato.
